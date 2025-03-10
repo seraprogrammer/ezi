@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Router</title>
+    <script src="//unpkg.com/ezi"></script>
+    <style>
+      .active {
+        color: #ff5733;
+        font-weight: bold;
+      }
+
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(to right, #ff5733, #ffc300);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+
+      .loading.active {
+        transform: scaleX(1);
+      }
+
+      .fade-enter {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      .fade-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.3s, transform 0.3s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Loading indicator -->
+    <div id="loading-bar" class="loading"></div>
+
+    <!-- Navigation -->
+    <nav>
+      <a href="" data-nav>Home</a>
+      <a href="about" data-nav>About</a>
+      <a href="contact" data-nav>Contact</a>
+      <a href="settings" data-nav>Settings</a>
+      <a href="404" data-nav>404</a>
+    </nav>
+
+    <!-- Route templates -->
+    <template route="">
+      <h1>Welcome Home</h1>
+      <p>This is the home page</p>
+    </template>
+
+    <template route="about">
+      <h1>About Us</h1>
+      <p>Learn more about our company</p>
+    </template>
+
+    <template route="contact">
+      <h1>Contact Us</h1>
+      <form id="contact-form">
+        <input type="text" placeholder="Name" required />
+        <input type="email" placeholder="Email" required />
+        <button type="submit">Send</button>
+      </form>
+    </template>
+
+    <template route="settings">
+      <h1>Settings</h1>
+      <div>
+        <label>
+          Dark Mode
+          <input type="checkbox" id="theme-toggle" />
+        </label>
+      </div>
+    </template>
+
+    <!-- 404 template -->
+    <template route="404">
+      <h1>404 - Page Not Found</h1>
+      <p>Sorry, the page you're looking for doesn't exist.</p>
+      <a href="" data-nav>Go Home</a>
+    </template>
+
+    <div id="root"></div>
+  </body>
+</html>
